@@ -2,11 +2,7 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        max = array[0]
-        array.size.times do
-          array.rotate!
-          max = array[0] if array[0] > max
-        end
+        max = array.reduce{|max, item| max > item ? max : item }
 
         i = 0
         while i < array.size
