@@ -17,21 +17,21 @@ module Exercise
         array
       end
 
-      def search(arr, qry, idx_start = nil, idx_end = nil)
-        idx_start ||= 0
-        idx_end ||= arr.length
+      def search(array, query, index_start = nil, index_end = nil)
+        index_start ||= 0
+        index_end ||= array.length
 
-        len = idx_end - idx_start
-        return arr[idx_start] == qry ? idx_start : -1 if len < 2
+        length = index_end - index_start
+        return array[index_start] == query ? index_start : -1 if length < 2
 
-        idx_cen = len / 2 + idx_start
-        if arr[idx_cen] > qry
-          idx_end = idx_cen
+        index_center = length / 2 + index_start
+        if array[index_center] > query
+          index_end = index_center
         else
-          idx_start = idx_cen
+          index_start = index_center
         end
 
-        search(arr, qry, idx_start, idx_end)
+        search(array, query, index_start, index_end)
       end
     end
   end
