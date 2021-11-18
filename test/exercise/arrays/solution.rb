@@ -3,14 +3,7 @@ module Exercise
     class << self
       def replace(array)
         max = array.reduce{|max, item| max > item ? max : item }
-
-        i = 0
-        while i < array.size
-          array[i] = array[i].positive? ? max : array[i]
-          i += 1
-        end
-
-        array
+        array.map { |i| i.positive? ? max : i }
       end
 
       def search(array, query, index_start = nil, index_end = nil)
