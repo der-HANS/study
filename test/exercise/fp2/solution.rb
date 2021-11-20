@@ -30,14 +30,13 @@ module Exercise
 
       # Написать свою функцию my_compact
       def my_compact
-        @new_ary = Exercise::Fp2::MyArray.new
+        @out_ary = Exercise::Fp2::MyArray.new
 
         my_each(self) do |item|
-          value = !block_given? ? item : yield(item)
-          @new_ary << value unless value.nil?
+          @out_ary << item unless item.nil?
         end
 
-        @new_ary
+        @out_ary
       end
 
       # Написать свою функцию my_reduce
