@@ -19,36 +19,34 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map
-        @out_ary = Exercise::Fp2::MyArray.new
+        acc = Exercise::Fp2::MyArray.new
 
-        my_each(self) do |item|
-          @out_ary << yield(item)
+        my_reduce(acc) do |acc, item|
+          acc << yield(item)
+          acc
         end
-
-        @out_ary
       end
 
       # Написать свою функцию my_compact
       def my_compact
-        @out_ary = Exercise::Fp2::MyArray.new
+        acc = Exercise::Fp2::MyArray.new
 
-        my_each(self) do |item|
-          @out_ary << item unless item.nil?
+        my_reduce(acc) do |acc, item|
+          acc << item unless item.nil?
+          acc
         end
-
-        @out_ary
       end
 
       # Написать свою функцию my_reduce
       def my_reduce(acc = nil, items = nil, &block)
-        items ||= dup
-        acc ||= items.delete_at(0)
+        items ||= self
+        acc, *items = items if acc.nil?
 
-        acc = yield(acc, items.delete_at(0))
+        one, *items = items
+        acc = yield(acc, one)
 
-        return acc if items.blank?
-
-        my_reduce(acc, items, &block)
+        acc = my_reduce(acc, items, &block) unless items.blank?
+        acc
       end
     end
   end
